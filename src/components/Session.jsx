@@ -1,33 +1,38 @@
 import React from "react";
+import { Row, Container, Button } from "react-bootstrap";
 
 const Session = (props) => {
-    const decreaseCounter = () => {
-      if (props.interval === 1) {
-        return;
-      };
-      props.onDecreaseSession();
-    };
+  const increaseCounter = () => {
+    if (props.interval === 60) {
+      return;
+    }
 
-    const increaseCounter = () => {
-      if (props.interval === 60) {
-        return;
-      };
-      props.onIncreaseSession();
-    };
-
-    return (
-      <div id="session">
-        <div id="session-label">Session length</div>
-        <button id="session-decrement" onClick={decreaseCounter()}>
-          -
-        </button>
-        <div id="session-length">{props.interval}</div>
-        {/* Default 25 min */}
-        <button id="session-increment" onClick={increaseCounter()}>
-          +
-        </button>
-      </div>
-    );
+    props.handleSession(true);
   };
 
-  export default Session;
+  const decreaseCounter = () => {
+    if (props.interval === 1) {
+      return;
+    }
+
+    props.handleSession(false);
+  };
+
+  return (
+    <Container id="session">
+      <Row id="session-label">Session length</Row>
+      <Row>
+        <Button variant="dark" id="session-decrement" onClick={decreaseCounter}>
+          -
+        </Button>
+        <div id="session-length">{props.interval}</div>
+        {/* Default 25 min */}
+        <Button variant="dark" id="session-increment" onClick={increaseCounter}>
+          +
+        </Button>
+      </Row>
+    </Container>
+  );
+};
+
+export default Session;
